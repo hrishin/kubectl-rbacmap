@@ -85,7 +85,14 @@ func run(cmd *cobra.Command, args []string) error {
 
 	ctx := context.Background()
 
-	results, err := rbac.ResolvePermissions(ctx, client, parsed, namespace)
+	// Try to expand cloud provider identities (e.g. AWS IAM ARNs) to Kubernetes subjects
+	expanded, err := rbac.ExpandSubjects(ctx, client, parsed)
+	if err != nil {
+		// Just a warning/log ideally, but we'll ignore it to not break normal operation
+		// as not all clusters have mapping ConfigMaps like aws-auth
+	}
+
+	results, err := rbac.ResolvePermissions(ctx, client, expanded, namespace)
 	if err != nil {
 		return fmt.Errorf("resolving permissions: %w", err)
 	}
