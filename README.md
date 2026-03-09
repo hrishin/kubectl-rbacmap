@@ -18,13 +18,13 @@ kubectl krew install rbacmap
 
 If you prefer to install it manually:
 
-1. Download the latest release from the [Releases page](https://github.com/hrishis/kubectl-rbacmap/releases).
+1. Download the latest release from the [Releases page](https://github.com/hrishin/kubectl-rbacmap/releases).
 2. Extract the binary and place it in your `$PATH`.
 
 Or compile it from source:
 
 ```bash
-git clone https://github.com/hrishis/kubectl-rbacmap.git
+git clone https://github.com/hrishin/kubectl-rbacmap.git
 cd kubectl-rbacmap
 make install
 ```
