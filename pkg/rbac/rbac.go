@@ -24,6 +24,9 @@ type Subject struct {
 	Kind      SubjectKind
 	Name      string
 	Namespace string // only relevant for ServiceAccounts
+
+	// MappedTo tracks other identities this subject mapped to (e.g. AWS ARN -> k8s user/groups)
+	MappedTo []string
 }
 
 // BindingSource captures where a permission came from (which binding + role).

@@ -25,15 +25,14 @@ func ExpandSubjects(ctx context.Context, client *kube.Client, subjects []Subject
 		}
 	}
 
-	for _, s := range subjects {
-		add(s)
+	awsMapped, err := expandAWSAuth(ctx, client, subjects)
+	if err == nil {
+		for _, s := range awsMapped {
+			add(s)
+		}
 	}
 
-	// 1. AWS EKS aws-auth Mapper
-	// We do a best-effort lookup of the kube-system/aws-auth configmap.
-	// If it exists, we map the input user ARNs to Kubernetes usernames/groups.
-	awsMapped, _ := expandAWSAuth(ctx, client, subjects)
-	for _, s := range awsMapped {
+	for _, s := range subjects {
 		add(s)
 	}
 
@@ -81,14 +80,25 @@ func expandAWSAuth(ctx context.Context, client *kube.Client, subjects []Subject)
 					matchedUser := (s.Name == username)
 
 					if matchedArn || matchedUser {
-						// If matched by ARN, include the username in results
+						// Track mapped identities for display
+						var mappedNames []string
 						if matchedArn && username != "" && username != "system:node:{{EC2PrivateDNSName}}" {
+							mappedNames = append(mappedNames, "User:"+username)
 							mapped = append(mapped, Subject{Kind: KindUser, Name: username})
 						}
-						// If matched by ARN *or* username, include all mapped groups
+
 						for _, g := range groups {
 							if gStr, ok := g.(string); ok {
+								mappedNames = append(mappedNames, "Group:"+gStr)
 								mapped = append(mapped, Subject{Kind: KindGroup, Name: gStr})
+							}
+						}
+
+						// Attach mapped identities back to the original subject
+						// We update it in the subjects slice so the formatter sees it.
+						for i := range subjects {
+							if subjects[i].Kind == s.Kind && subjects[i].Name == s.Name {
+								subjects[i].MappedTo = append(subjects[i].MappedTo, mappedNames...)
 							}
 						}
 					}

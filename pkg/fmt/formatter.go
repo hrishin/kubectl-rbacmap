@@ -35,7 +35,9 @@ func printTable(w io.Writer, results []rbac.SubjectPermissions) {
 		printSubjectHeader(w, sp.Subject)
 
 		if len(sp.Permissions) == 0 {
-			fmt.Fprintln(w, "(no permissions found)")
+			if len(sp.Subject.MappedTo) == 0 {
+				fmt.Fprintln(w, "(no permissions found)")
+			}
 			continue
 		}
 
@@ -61,7 +63,9 @@ func printMarkdown(w io.Writer, results []rbac.SubjectPermissions) {
 		printSubjectHeader(w, sp.Subject)
 
 		if len(sp.Permissions) == 0 {
-			fmt.Fprintln(w, "(no permissions found)")
+			if len(sp.Subject.MappedTo) == 0 {
+				fmt.Fprintln(w, "(no permissions found)")
+			}
 			continue
 		}
 
@@ -143,7 +147,11 @@ func subjectKindLabel(subj rbac.Subject) string {
 
 // printSubjectHeader writes the subject kind and name header line.
 func printSubjectHeader(w io.Writer, subj rbac.Subject) {
-	fmt.Fprintf(w, "\n%s: %s\n\n", subjectKindLabel(subj), subj.Name)
+	fmt.Fprintf(w, "\n%s: %s\n", subjectKindLabel(subj), subj.Name)
+	if len(subj.MappedTo) > 0 {
+		fmt.Fprintf(w, "(Mapped to: %s)\n", strings.Join(subj.MappedTo, ", "))
+	}
+	fmt.Fprintln(w)
 }
 
 // formattedEntry is an intermediate representation for output.
