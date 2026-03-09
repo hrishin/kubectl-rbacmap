@@ -3,7 +3,7 @@ kind: Plugin
 metadata:
   name: rbac-map
 spec:
-  version: "v0.1.0" # This will be managed by Git Tags
+  version: "v0.2.0" # This will be managed by Git Tags
   homepage: https://github.com/hrishin/kubectl-rbacmap
   shortDescription: "Map RBAC permissions for subjects (ServiceAccounts, Users, Groups)"
   description: |
@@ -17,34 +17,34 @@ spec:
         os: darwin
         arch: amd64
     # The URI will be your GitHub release URL, like:
-    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.1.0/kubectl-rbac-map_Darwin_x86_64.tar.gz
-    sha256: "96303b28bc0fa88dd1f6e95b519600b1f35ae7d06e46b147d1b6774c98f93d37"
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.2.0/kubectl-rbac-map_Darwin_x86_64.tar.gz
+    sha256: "9775a850b06457f43a14a3fc532cac57a82c2358c340d9b55b9c8bbb38728067"
     bin: kubectl-rbac-map
   - selector:
       matchLabels:
         os: darwin
         arch: arm64
-    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.1.0/kubectl-rbac-map_Darwin_arm64.tar.gz
-    sha256: "05ce013f777519d011c02d5e0f7d80b38f13ed0501e9ca4146fe318d3a41d55b"
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.2.0/kubectl-rbac-map_Darwin_arm64.tar.gz
+    sha256: "3c398f949c039adc92e948f233743b7553f8f4062841b99eb6ec40f93ad246f2"
     bin: kubectl-rbac-map
   - selector:
       matchLabels:
         os: linux
         arch: amd64
-    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.1.0/kubectl-rbac-map_Linux_x86_64.tar.gz
-    sha256: "aa6f02f29948abeb7a294eafe8918eebaeee1c10604a3e83547bd777b83a1b2b"
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.2.0/kubectl-rbac-map_Linux_x86_64.tar.gz
+    sha256: "cf0421b63de3c3ca809263ea5fd152a41fd4c0c6678569b4235e0a2cba637930"
     bin: kubectl-rbac-map
   - selector:
       matchLabels:
         os: linux
         arch: arm64
-    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.1.0/kubectl-rbac-map_Linux_arm64.tar.gz
-    sha256: "3f31df4ab339cddc19822867f50300cb35cf2369fe6843be934c2a146742dde1"
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.2.0/kubectl-rbac-map_Linux_arm64.tar.gz
+    sha256: "f72dfb2c510ab3d5c87cf2dbe7130874edd959bcbaa49febd6ee2a80232a36d3"
     bin: kubectl-rbac-map
   - selector:
       matchLabels:
         os: windows
         arch: amd64
-    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.1.0/kubectl-rbac-map_Windows_x86_64.zip
-    sha256: "ad8a361b81c535ebcd18ea424a73c2199c62447d2fa0aa8f7daceb7e2d5feb47"
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/v0.2.0/kubectl-rbac-map_Windows_x86_64.zip
+    sha256: "7664b5552d119b53bb6e043d3d4162f349d9923b0eb88fc1bad029adb33e1baf"
     bin: kubectl-rbac-map.exe
