@@ -31,13 +31,13 @@ make install
 
 ## Usage
 
-You can invoke the plugin using either `kubectl rbacmap` or as a standalone binary `./kubectl-rbac-map`.
+You can invoke the plugin using either `kubectl rbac-map` or as a standalone binary `./kubectl-rbac-map`.
 
 ### Basic Queries
 
 Query a ServiceAccount:
 ```bash
-kubectl rbacmap --subjects sa:aws-load-balancer-controller -n aws-load-balancer-controller
+kubectl rbac-map --subjects sa:aws-load-balancer-controller -n aws-load-balancer-controller
 
 Service Account: aws-load-balancer-controller
 
@@ -79,7 +79,7 @@ discovery.k8s.io/endpointslices                get,list,watch                   
 
 Query a User:
 ```bash
- $ kubectl rbacmap --subjects user:hrishi                                                    
+ $ kubectl rbac-map --subjects user:hrishi                                                    
 
 Group: system:masters
 
@@ -95,7 +95,7 @@ User: hrishi
 
 Query multiple subjects:
 ```bash
-kubectl rbacmap --subjects sa:sa1,user:admin
+kubectl rbac-map --subjects sa:sa1,user:admin
 ```
 
 ### Cloud Provider Integration (EKS)
@@ -103,7 +103,7 @@ kubectl rbacmap --subjects sa:sa1,user:admin
 The plugin automatically evaluates `aws-auth` in `kube-system` to resolve IAM ARNs.
 
 ```bash
-kubectl rbacmap --subjects user:arn:aws:iam::123456789012:user/admin
+kubectl rbac-map --subjects user:arn:aws:iam::123456789012:user/admin
 ```
 
 This will automatically query the mapped Kubernetes `User` and `Group` associated with that ARN!
@@ -114,8 +114,8 @@ By default, the output is formatted as a kubectl-style aligned table. You can mo
 
 ```bash
 # Output as markdown table
-kubectl rbacmap --subjects group:developers -o markdown
+kubectl rbac-map --subjects group:developers -o markdown
 
 # Output as CSV
-kubectl rbacmap --subjects group:developers -o csv
+kubectl rbac-map --subjects group:developers -o csv
 ```
