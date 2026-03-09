@@ -22,14 +22,14 @@ var (
 
 // rootCmd is the base command for kubectl-rbacmap.
 var rootCmd = &cobra.Command{
-	Use:   "kubectl-rbacmap",
+	Use:   "kubectl-rbac-map",
 	Short: "Map RBAC permissions for Kubernetes subjects",
-	Long: `kubectl-rbacmap finds all permissions associated with Kubernetes subjects
+	Long: `kubectl-rbac-map finds all permissions associated with Kubernetes subjects
 (ServiceAccounts, Users, Groups) by inspecting Roles, ClusterRoles,
 RoleBindings, and ClusterRoleBindings.
 
 Usage as a kubectl plugin:
-  kubectl rbacmap --subjects sa:my-service-account -n my-namespace
+  kubectl rbac-map --subjects sa:my-service-account -n my-namespace
 
 Subject format:
   sa:<name>              ServiceAccount (uses -n namespace or "default")

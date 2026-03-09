@@ -18,7 +18,7 @@ builds:
     ignore:
       - goos: windows
         goarch: arm64
-    binary: kubectl-rbacmap
+    binary: kubectl-rbac-map
 
 archives:
   - format: tar.gz

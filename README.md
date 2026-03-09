@@ -1,4 +1,4 @@
-# kubectl-rbacmap
+# kubectl-rbac-map
 
 A `kubectl` plugin that maps Kubernetes RBAC permissions for subjects (ServiceAccounts, Users, Groups) by dynamically evaluating `RoleBindings` and `ClusterRoleBindings`.
 
@@ -31,7 +31,7 @@ make install
 
 ## Usage
 
-You can invoke the plugin using either `kubectl rbacmap` or as a standalone binary `./kubectl-rbacmap`.
+You can invoke the plugin using either `kubectl rbacmap` or as a standalone binary `./kubectl-rbac-map`.
 
 ### Basic Queries
 

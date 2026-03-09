@@ -1,4 +1,4 @@
-BINARY_NAME := kubectl-rbacmap
+BINARY_NAME := kubectl-rbac-map
 MODULE      := github.com/hrishis/kubectl-rbacmap
 GO          := go
 GOFLAGS     :=
