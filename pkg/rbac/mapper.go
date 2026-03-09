@@ -75,13 +75,21 @@ func expandAWSAuth(ctx context.Context, client *kube.Client, subjects []Subject)
 			groups, _ := entry["groups"].([]interface{})
 
 			for _, s := range subjects {
-				if s.Kind == KindUser && matchAWSARN(s.Name, entryArn) {
-					if username != "" && username != "system:node:{{EC2PrivateDNSName}}" {
-						mapped = append(mapped, Subject{Kind: KindUser, Name: username})
-					}
-					for _, g := range groups {
-						if gStr, ok := g.(string); ok {
-							mapped = append(mapped, Subject{Kind: KindGroup, Name: gStr})
+				if s.Kind == KindUser {
+					// We can match either by the mapped IAM ARN or the resulting username.
+					matchedArn := matchAWSARN(s.Name, entryArn)
+					matchedUser := (s.Name == username)
+
+					if matchedArn || matchedUser {
+						// If matched by ARN, include the username in results
+						if matchedArn && username != "" && username != "system:node:{{EC2PrivateDNSName}}" {
+							mapped = append(mapped, Subject{Kind: KindUser, Name: username})
+						}
+						// If matched by ARN *or* username, include all mapped groups
+						for _, g := range groups {
+							if gStr, ok := g.(string); ok {
+								mapped = append(mapped, Subject{Kind: KindGroup, Name: gStr})
+							}
 						}
 					}
 				}
