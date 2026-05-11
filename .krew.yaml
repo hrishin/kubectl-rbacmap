@@ -1,0 +1,50 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: rbac-map
+spec:
+  version: {{ .TagName }}
+  homepage: https://github.com/hrishin/kubectl-rbacmap
+  shortDescription: "Map RBAC permissions for subjects (ServiceAccounts, Users, Groups)"
+  description: |
+    kubectl-rbac-map finds all permissions associated with Kubernetes subjects
+    by inspecting Roles, ClusterRoles, RoleBindings, and ClusterRoleBindings.
+    It resolves complex mappings (like AWS IAM ARNs to EKS identities) and
+    outputs the exact access granted in clean tables, markdown, or CSV.
+    It also supports reverse lookup: given a resource, find all subjects with access.
+  platforms:
+  - selector:
+      matchLabels:
+        os: darwin
+        arch: amd64
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/{{ .TagName }}/kubectl-rbacmap_Darwin_x86_64.tar.gz
+    sha256: {{ .Checksum "kubectl-rbacmap_Darwin_x86_64.tar.gz" }}
+    bin: kubectl-rbac-map
+  - selector:
+      matchLabels:
+        os: darwin
+        arch: arm64
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/{{ .TagName }}/kubectl-rbacmap_Darwin_arm64.tar.gz
+    sha256: {{ .Checksum "kubectl-rbacmap_Darwin_arm64.tar.gz" }}
+    bin: kubectl-rbac-map
+  - selector:
+      matchLabels:
+        os: linux
+        arch: amd64
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/{{ .TagName }}/kubectl-rbacmap_Linux_x86_64.tar.gz
+    sha256: {{ .Checksum "kubectl-rbacmap_Linux_x86_64.tar.gz" }}
+    bin: kubectl-rbac-map
+  - selector:
+      matchLabels:
+        os: linux
+        arch: arm64
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/{{ .TagName }}/kubectl-rbacmap_Linux_arm64.tar.gz
+    sha256: {{ .Checksum "kubectl-rbacmap_Linux_arm64.tar.gz" }}
+    bin: kubectl-rbac-map
+  - selector:
+      matchLabels:
+        os: windows
+        arch: amd64
+    uri: https://github.com/hrishin/kubectl-rbacmap/releases/download/{{ .TagName }}/kubectl-rbacmap_Windows_x86_64.zip
+    sha256: {{ .Checksum "kubectl-rbacmap_Windows_x86_64.zip" }}
+    bin: kubectl-rbac-map.exe
