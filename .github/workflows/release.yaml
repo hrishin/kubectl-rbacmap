@@ -29,5 +29,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Wait for release to propagate
+        run: sleep 30
+
       - name: Update new version in krew-index
         uses: rajatjindal/krew-release-bot@v0.0.50
