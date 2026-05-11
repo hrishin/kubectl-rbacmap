@@ -9,11 +9,11 @@ import (
 
 func TestParseSubjects(t *testing.T) {
 	tests := []struct {
-		name          string
-		subjects      []string
-		defaultNs     string
-		expected      []Subject
-		expectError   bool
+		name        string
+		subjects    []string
+		defaultNs   string
+		expected    []Subject
+		expectError bool
 	}{
 		{
 			name:      "valid service account with default ns",
@@ -32,8 +32,8 @@ func TestParseSubjects(t *testing.T) {
 			},
 		},
 		{
-			name:      "valid user and group",
-			subjects:  []string{"user:admin@example.com", "group:developers"},
+			name:     "valid user and group",
+			subjects: []string{"user:admin@example.com", "group:developers"},
 			expected: []Subject{
 				{Kind: KindUser, Name: "admin@example.com"},
 				{Kind: KindGroup, Name: "developers"},
@@ -159,7 +159,7 @@ func TestRulesToPermissions(t *testing.T) {
 	if perms[2].Resource != "apps/deployments" || !reflect.DeepEqual(perms[2].Actions, []string{"*"}) {
 		t.Errorf("unexpected perm 2: %+v", perms[2])
 	}
-	
+
 	// Verify RoleRef and Source attached correctly
 	if perms[0].RoleType != "Role" || perms[0].RoleName != "test-role" || perms[0].Source.BindingName != "test-binding" {
 		t.Errorf("role ref / source mapping failed")
